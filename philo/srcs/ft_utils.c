@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 18:00:42 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/14 18:14:40 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/14 18:39:42 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int ft_atoi(char *str)
     result = 0;
     sign = 1;
     i = 0;
-    while ((str[i]) && (str[i] == ' ' || str[i] >= 9 && str[i] <= 13))
+    while ((str[i]) && (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)))
         i++;
     if (str[i] == '+' || str[i] == '-')
     {
@@ -53,7 +53,7 @@ int ft_atoi(char *str)
 
 bool    ft_isdigit(int c)
 {
-    if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+    if (c >= '0' && c <= '9')
         return (true);
     return (false);
 }

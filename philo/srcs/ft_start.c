@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init.c                                          :+:      :+:    :+:   */
+/*   ft_start.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 15:33:27 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/14 18:43:29 by cscelfo          ###   ########.fr       */
+/*   Created: 2023/06/14 18:23:07 by cscelfo           #+#    #+#             */
+/*   Updated: 2023/06/14 18:46:13 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_data    *ft_init_data(char **av, bool optional)
+void    ft_daje_roma(t_data *data, bool optional)
 {
-    t_data  *data;
-
-    data = ft_calloc(1, sizeof(t_data *));
-    data->philo_num = ft_atoi(av[1]);
-    data->time_to_die = ft_atoi(av[2]);
-    data->time_to_eat = ft_atoi(av[3]);
-    data->time_to_sleep = ft_atoi(av[4]);
-    if (optional == true)
-        data->eating_times = ft_atoi(av[5]);
-    return (data);
+    // printf("data->philo_num: [%d]\ndata->time_to_die: [%d]\ndata->time_to_eat: [%d]\ndata->time_to_sleep: [%d]\n", data->philo_num, data->time_to_die, data->time_to_eat, data->time_to_sleep);
+    // if (optional == true)
+    //     printf("data->eating_times: [%d]\n", data->eating_times);
+    
+    return ;
 }

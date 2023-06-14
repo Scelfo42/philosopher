@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_errors.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 14:39:34 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/14 18:08:09 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/14 18:36:29 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int ft_arg_error(void)
     return (1);
 }
 
-bool    ft_check_error(int ac, char **av)
+int    ft_check_errors(int ac, char **av)
 {
     int i;
     int j;
@@ -58,4 +58,5 @@ bool    ft_check_error(int ac, char **av)
                 return (ft_threads_error());
         }
     }
+    return (0);
 }
