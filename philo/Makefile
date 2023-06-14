@@ -12,15 +12,13 @@ CFLAGS = -Wall -Wextra -Werror $(THREAD_FLAG) $(DEBUG_FLAG)
 
 INCLUDE = header
 
-HEADER = $(INCLUDE)/ft_$(NAME).h
-
 DEPS = $(INCLUDE)
 
 SRCS_DIR = srcs
 
 OBJ_DIR = obj
 
-SRCS_FILES = ft_philo.h \
+SRCS_FILES = ft_philo.c \
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 
@@ -37,7 +35,7 @@ NC              = \033[0m
 
 $(OBJ_DIR)/%.o : $(SRCS_DIR)/%.c $(DEPS)
 	mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER_1)
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE)
 
 all: $(NAME)
 
