@@ -6,34 +6,16 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 14:39:34 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/14 18:36:29 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/15 16:29:16 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int ft_threads_error(void)
+int ft_strerror(char *str, int return_value)
 {
-    printf("It is suggested, so i force you, to use less threads. TY");
-    return (4);
-}
-
-int ft_negative_error(void)
-{
-    printf("YO CHILL! You cannot pass a negative number");
-    return (3);
-}
-
-int ft_digit_error(void)
-{
-    printf("You MUST pass a digit, bruv\n");
-    return (2);
-}
-
-int ft_arg_error(void)
-{
-    printf("Number of arguments. Watch the subject, you twat\n");
-    return (1);
+    printf("%s\n", str);
+    return (return_value);
 }
 
 int    ft_check_errors(int ac, char **av)
@@ -48,14 +30,14 @@ int    ft_check_errors(int ac, char **av)
         while (av[i][++j])
         {
             if (!ft_isdigit(av[i][j]))
-                return (ft_digit_error());
+                return (ft_strerror("You MUST pass a digit, bruv", 2));
         }
         if (ft_atoi(av[i]) < 0)
-            return (ft_negative_error());
+            return (ft_strerror("YO CHILL! You cannot pass a negative number", 3));
         if (i == 1)
         {
             if (ft_atoi(av[i]) > 100)
-                return (ft_threads_error());
+                return (ft_strerror("It is suggested, so i force you, to use less threads. TY", 4));
         }
     }
     return (0);

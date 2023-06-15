@@ -6,11 +6,26 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 18:00:42 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/14 18:39:42 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/15 17:59:35 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+time_t    ft_get_time(void)
+{
+    struct timeval time;
+    time_t  bob;
+    time_t  bob2;
+
+    gettimeofday(&time, NULL);
+    bob = time.tv_sec * 1000;
+    bob2 = time.tv_usec / 1000;
+    // printf("second: %ld\n", bob);
+    // printf("microsecond %ld\n", bob2);
+    // printf("result: %ld", bob + bob2);
+    return (bob + bob2);
+}
 
 void    *ft_calloc(size_t nmemb, size_t size)
 {

@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 11:06:23 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/14 18:44:43 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/15 17:52:41 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,28 @@ typedef struct s_data
     int             time_to_eat;
     int             time_to_sleep;
     int             eating_times; //optional argument
+    bool            optional_arg;
+    pthread_mutex_t *arr_fork;
 }   t_data;
 
 typedef struct s_philo
 {
-    pthread_t       *philo;
-    pthread_mutex_t *left_fork;
-    pthread_mutex_t *right_fork;
+    pthread_t       *thread;
+    int             left_fork;
+    int             right_fork;
     t_data          *data;
 }   t_philo;
 
 /*  ERRORS  */
+int ft_strerror(char *str_error, int return_value);
 int    ft_check_errors(int ac, char **av);
-int     ft_arg_error(void);
-int     ft_digit_error(void);
-int     ft_negative_error(void);
-int     ft_threads_error(void);
 /*  UTILS   */
 void    *ft_calloc(size_t nmemb, size_t size);
 bool    ft_isdigit(int c);
 int     ft_atoi(char *str);
 /*  INIT    */
 t_data  *ft_init_data(char **av, bool optional);
-/*  START   */
-void    ft_daje_roma(t_data *data, bool optional);
+t_philo *ft_init_forks(t_data *data);
+time_t    ft_get_time(void);
 
 #endif
