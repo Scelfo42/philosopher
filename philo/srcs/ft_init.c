@@ -6,11 +6,32 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:33:27 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/15 17:53:52 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/17 14:53:44 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void    ft_init_threads(t_philo *philo)
+{
+    int i;
+
+    i = 0;
+    while (i < philo->data->philo_num)
+    {
+        if (i % 2 != 0)
+            usleep(1000);
+        printf("Thread %d started successfully", i);
+        pthread_create(&philo[i].thread, NULL, ft_routine, (void *)&philo[i]);
+        i++;
+    }
+    i = 0;
+    while (i < philo->data->philo_num)
+    {
+        pthread_join(philo[i].thread, NULL);
+        i++;
+    }
+}
 
 t_philo *ft_init_forks(t_data *data)
 {
@@ -29,6 +50,7 @@ t_philo *ft_init_forks(t_data *data)
             philo[i].left_fork = 0;
         else
             philo[i].left_fork = i + 1;
+        philo[i].id = i;
         i++;
     }
     return (philo);

@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:15:21 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/15 18:00:56 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/17 11:51:47 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int main(int ac, char **av)
     {
         data = ft_init_data(av, optional);
         philo = ft_init_forks(data);
+        ft_init_threads(philo);
         //create threads, philosophers and loop.
     }
     else
