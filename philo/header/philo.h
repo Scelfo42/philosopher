@@ -39,8 +39,16 @@ typedef struct s_philo
     int         left_fork;
     int         right_fork;
     int         id;
+    int         last_meal;
+    int         real_time;
     t_data      *data;
 }   t_philo;
+
+typedef struct s_watcher
+{
+    pthread thread;
+    t_philo *philo;
+}   t_watcher;
 
 /*  ERRORS  */
 int     ft_strerror(char *str_error, int return_value);

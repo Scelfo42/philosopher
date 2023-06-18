@@ -14,23 +14,24 @@
 
 void    ft_init_threads(t_philo *philo)
 {
-    int i;
+    t_watcher   *watcher;
+    int         i;
 
+    watcher = ft_calloc(1, sizeof(t_watcher));
     i = 0;
     while (i < philo->data->philo_num)
     {
-        if (i % 2 != 0)
-            usleep(1000);
-        printf("Thread %d started successfully", i);
         pthread_create(&philo[i].thread, NULL, ft_routine, (void *)&philo[i]);
         i++;
     }
     i = 0;
+    pthread_create(&watcher->thread, NULL, ft_watcher, (void *)philo);
     while (i < philo->data->philo_num)
     {
         pthread_join(philo[i].thread, NULL);
         i++;
     }
+    pthread_join(watcher->thread, NULL);
 }
 
 t_philo *ft_init_forks(t_data *data)
@@ -51,6 +52,7 @@ t_philo *ft_init_forks(t_data *data)
         else
             philo[i].left_fork = i + 1;
         philo[i].id = i;
+        philo[i].data = data;
         i++;
     }
     return (philo);

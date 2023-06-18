@@ -2,3 +2,4 @@ philo
 **/.vscode/
 **/*.o
 **/obj/
+**/*.nfs

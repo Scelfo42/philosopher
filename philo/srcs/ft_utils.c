@@ -12,18 +12,15 @@
 
 #include "philo.h"
 
-time_t    ft_get_time(void)
+int    ft_get_time(void)
 {
     struct timeval time;
-    time_t  time_s;
-    time_t  time_us;
+    int  time_s;
+    int  time_us;
 
     gettimeofday(&time, NULL);
-    time_s = time.tv_sec * 1000;
-    time_us = time.tv_usec / 1000;
-    // printf("second: %ld\n", bob);
-    // printf("microsecond %ld\n", bob2);
-    // printf("result: %ld", bob + bob2);
+    time_s = (int)time.tv_sec * 1000;
+    time_us = (int)time.tv_usec / 1000;
     return (time_s + time_us);
 }
 

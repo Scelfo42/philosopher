@@ -34,5 +34,6 @@ int main(int ac, char **av)
     }
     else
         return (ft_strerror("Arguments given apparently have some errors, good luck finding that out.", 5));
+    //memory leak
     return (0);
 }
