@@ -6,22 +6,18 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 18:00:42 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/17 11:43:37 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/19 15:40:57 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int    ft_get_time(void)
+void    ft_print_info(t_philo *philo, char *str)
 {
-    struct timeval time;
-    int  time_s;
-    int  time_us;
-
-    gettimeofday(&time, NULL);
-    time_s = (int)time.tv_sec * 1000;
-    time_us = (int)time.tv_usec / 1000;
-    return (time_s + time_us);
+    pthread_mutex_lock(philo->mutex->print);
+    //controllo sulla morte (?)
+    printf("[%d] %d %s\n", ft_timer(philo->start_time, philo->mutex->timer), philo->id, str);
+    pthread_mutex_unlock(philo->mutex->print);
 }
 
 void    *ft_calloc(size_t nmemb, size_t size)

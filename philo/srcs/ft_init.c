@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:33:27 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/17 14:53:44 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/19 15:54:37 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 void    ft_init_threads(t_philo *philo)
 {
-    t_watcher   *watcher;
+    pthread_t   monitoring;
     int         i;
 
-    watcher = ft_calloc(1, sizeof(t_watcher));
     i = 0;
     while (i < philo->data->philo_num)
     {
+        philo[i].start_time = ft_get_time();
         pthread_create(&philo[i].thread, NULL, ft_routine, (void *)&philo[i]);
         i++;
     }
     i = 0;
-    pthread_create(&watcher->thread, NULL, ft_watcher, (void *)philo);
+    pthread_create(&monitoring, NULL, ft_monitoring, (void *)philo);
+    pthread_join(monitoring, NULL);
     while (i < philo->data->philo_num)
     {
         pthread_join(philo[i].thread, NULL);
         i++;
     }
-    pthread_join(watcher->thread, NULL);
 }
 
-t_philo *ft_init_forks(t_data *data)
+t_philo *ft_init_forks(t_data *data, t_mutex *mutex)
 {
     t_philo *philo;
     int     i;
@@ -53,9 +53,22 @@ t_philo *ft_init_forks(t_data *data)
             philo[i].left_fork = i + 1;
         philo[i].id = i;
         philo[i].data = data;
+        philo[i].mutex = mutex;
         i++;
     }
     return (philo);
+}
+
+t_mutex *ft_init_mutex(t_mutex *mutex)
+{
+    mutex = ft_calloc(1, sizeof(t_mutex));
+    mutex->death = ft_calloc(1, sizeof(pthread_mutex_t));
+    mutex->print = ft_calloc(1, sizeof(pthread_mutex_t));
+    mutex->timer = ft_calloc(1, sizeof(pthread_mutex_t));
+    pthread_mutex_init(mutex->death, NULL);
+    pthread_mutex_init(mutex->print, NULL);
+    pthread_mutex_init(mutex->timer, NULL);
+    return (mutex);
 }
 
 t_data    *ft_init_data(char **av, bool optional)
