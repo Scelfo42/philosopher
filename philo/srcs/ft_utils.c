@@ -6,62 +6,61 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 18:00:42 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/19 15:40:57 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/20 17:55:07 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void    ft_print_info(t_philo *philo, char *str)
+void	ft_print_info(t_philo *philo, char *str)
 {
-    pthread_mutex_lock(philo->mutex->print);
-    //controllo sulla morte (?)
-    printf("[%d] %d %s\n", ft_timer(philo->start_time, philo->mutex->timer), philo->id, str);
-    pthread_mutex_unlock(philo->mutex->print);
+	pthread_mutex_lock(philo->mutex->print);
+	printf("[%llu] %d %s\n", ft_timer(philo->time_delay, philo->mutex->timer), philo->id, str);
+	pthread_mutex_unlock(philo->mutex->print);
 }
 
-void    *ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-    void    *new_memory;
-    size_t  bob;
+	void	*new_memory;
+	size_t	bob;
 
-    bob = nmemb * size;
-    if (bob < nmemb)
-        return (NULL);
-    new_memory = malloc(bob);
-    if (!new_memory)
-        return (NULL);
-    memset(new_memory, 0, bob);
-    return (new_memory);
+	bob = nmemb * size;
+	if (bob < nmemb)
+		return (NULL);
+	new_memory = malloc(bob);
+	if (!new_memory)
+		return (NULL);
+	memset(new_memory, 0, bob);
+	return (new_memory);
 }
 
-int ft_atoi(char *str)
+int	ft_atoi(char *str)
 {
-    int result;
-    int sign;
-    int i;
+	int	result;
+	int	sign;
+	int	i;
 
-    result = 0;
-    sign = 1;
-    i = 0;
-    while ((str[i]) && (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)))
-        i++;
-    if (str[i] == '+' || str[i] == '-')
-    {
-        if (str[i++] == '-')
-            sign = -1;
-    }
-    while (str[i] >= '0' && str[i] <= '9')
-    {
-        result = (result * 10) + (str[i] - '0');
-        i++;
-    }
-    return (result * sign);
+	result = 0;
+	sign = 1;
+	i = 0;
+	while ((str[i]) && (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)))
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i++] == '-')
+			sign = -1;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = (result * 10) + (str[i] - '0');
+		i++;
+	}
+	return (result * sign);
 }
 
-bool    ft_isdigit(int c)
+bool	ft_isdigit(int c)
 {
-    if (c >= '0' && c <= '9')
-        return (true);
-    return (false);
+	if ((c >= '0' && c <= '9') || (c == '+' || c == '-'))
+		return (true);
+	return (false);
 }
