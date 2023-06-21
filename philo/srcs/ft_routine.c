@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 11:50:09 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/20 17:54:57 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/21 18:47:10 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	*ft_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	while (philo->data->flag_watcher == false)
+	while (*(philo->death_check) == false && *(philo->eat_check) == false)
 	{
 		if (philo->id % 2 == 0)
 			usleep(1000);

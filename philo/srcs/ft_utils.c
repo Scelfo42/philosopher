@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 18:00:42 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/20 17:55:07 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/21 17:40:10 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void	ft_print_info(t_philo *philo, char *str)
 {
-	pthread_mutex_lock(philo->mutex->print);
-	printf("[%llu] %d %s\n", ft_timer(philo->time_delay, philo->mutex->timer), philo->id, str);
-	pthread_mutex_unlock(philo->mutex->print);
+	pthread_mutex_lock(philo->mutex->printing);
+	if (*philo->death_check == false)
+		printf("[%llu] %d %s\n", ft_timer(philo->time_delay, philo->mutex->timing), philo->id, str);
+	pthread_mutex_unlock(philo->mutex->printing);
 }
 
 void	*ft_calloc(size_t nmemb, size_t size)

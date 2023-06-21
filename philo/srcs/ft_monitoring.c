@@ -6,18 +6,11 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:19 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/20 18:08:41 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/21 17:47:49 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-/* WARNING: molto probabilmente e' sbagliato il join nel file init.c, 
-questo perche' appena viene lanciato il programma, 
-tutti i filosofi vanno completamente a fare in culo
-e solo il monitoring parte, fa tutta la sua roba, ovvero un beato cazzo di niente,
-poi schianta e partono i filosofi, probabilmente artefici di tutto cio'.
-*/
 
 void	*ft_monitoring(void *arg)
 {
@@ -28,17 +21,24 @@ void	*ft_monitoring(void *arg)
 	philo = (t_philo *)arg;
 	i = 0;
 	die_time = philo->data->time_to_die / 1000;
-	// while (!ft_eat_amount_check(philo, i))
 	while (1)
 	{
 		if (i == philo->data->philo_num)
 			i = 0;
-		// printf("\n\nlast_meal of philo[%d]: [%llu]\n\n", i, philo[i].last_meal);
-		// printf("\n\nactual time: [%llu]\n\n", ft_get_time());
-		//printf("\n\ntimer: %llu\n\n", ft_timer(philo[i].last_meal, philo[i].mutex->timer));
-		if (ft_timer(philo[i].last_meal, philo[i].mutex->timer) > die_time)
+		if (ft_timer(philo[i].last_meal, philo[i].mutex->timing) > die_time)
 		{
-			ft_print_info(philo, "has died!");
+			ft_print_info(&philo[i], "has died!");
+			pthread_mutex_lock(philo[i].mutex->death);
+			*philo[i].death_check = true;
+			pthread_mutex_unlock(philo[i].mutex->death);
+			break ;
+		}
+		if (philo->data->optional_arg && ft_eat_amount_check(philo, i))
+		{
+			ft_print_info(&philo[i], "is satollo!");
+			pthread_mutex_lock(philo[i].mutex->eating);
+			*philo[i].eat_check = true;
+			pthread_mutex_unlock(philo[i].mutex->eating);
 			break ;
 		}
 		i++;

@@ -20,7 +20,7 @@ OBJ_DIR = obj
 
 SRCS_FILES =	ft_philo.c ft_errors.c ft_utils.c ft_init.c \
 				ft_routine.c ft_monitoring.c ft_time.c \
-				ft_destructor.c ft_routine_utils.c \
+				ft_destructor.c ft_monitoring_utils.c \
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 

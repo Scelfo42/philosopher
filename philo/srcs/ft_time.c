@@ -6,21 +6,19 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:39:15 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/20 17:59:28 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/21 17:14:51 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long long unsigned	ft_timer(long long unsigned diff, pthread_mutex_t *timer)
+long long unsigned	ft_timer(long long unsigned diff, pthread_mutex_t *timing)
 {
 	long long unsigned	actual_time;
 	
-	pthread_mutex_lock(timer);
+	pthread_mutex_lock(timing);
 	actual_time = ft_get_time();
-	// printf("\nactual_time: %llu\n", actual_time);
-	// printf("\ndiff: %llu\n", diff);
-	pthread_mutex_unlock(timer);
+	pthread_mutex_unlock(timing);
 	return (actual_time - diff);
 }
 

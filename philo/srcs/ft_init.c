@@ -6,29 +6,40 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:33:27 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/20 17:55:57 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/21 17:25:43 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_init_threads(t_philo *philo)
+void	ft_init_monitoring(t_philo *philo)
 {
 	pthread_t	monitoring;
+	
+	pthread_create(&monitoring, NULL, ft_monitoring, philo);
+	pthread_join(monitoring, NULL);
+}
+
+void	ft_init_threads(t_philo *philo)
+{
 	int			i;
+	bool		death;
+	bool		eat;
 
 	i = 0;
+	death = false;
+	eat = false;
 	while (i < philo->data->philo_num)
 	{
 		philo[i].time_delay = ft_get_time();
 		philo[i].last_meal = philo[i].time_delay;
-		printf("Creating thread %d\n", i);
+		philo[i].death_check = &death;
+		philo[i].eat_check = &eat;
 		pthread_create(&philo[i].thread, NULL, ft_routine, &philo[i]);
 		i++;
 	}
+	ft_init_monitoring(philo);
 	i = 0;
-	pthread_create(&monitoring, NULL, ft_monitoring, philo);
-	pthread_join(monitoring, NULL);
 	while (i < philo->data->philo_num)
 	{
 		pthread_join(philo[i].thread, NULL);
@@ -68,13 +79,13 @@ t_mutex	*ft_init_mutex(t_mutex *mutex)
 {
 	mutex = ft_calloc(1, sizeof(t_mutex));
 	mutex->death = ft_calloc(1, sizeof(pthread_mutex_t));
-	mutex->print = ft_calloc(1, sizeof(pthread_mutex_t));
-	mutex->timer = ft_calloc(1, sizeof(pthread_mutex_t));
-	mutex->eat_check = ft_calloc(1, sizeof(pthread_mutex_t));
+	mutex->printing = ft_calloc(1, sizeof(pthread_mutex_t));
+	mutex->timing = ft_calloc(1, sizeof(pthread_mutex_t));
+	mutex->eating = ft_calloc(1, sizeof(pthread_mutex_t));
 	pthread_mutex_init(mutex->death, NULL);
-	pthread_mutex_init(mutex->print, NULL);
-	pthread_mutex_init(mutex->timer, NULL);
-	pthread_mutex_init(mutex->eat_check, NULL);
+	pthread_mutex_init(mutex->printing, NULL);
+	pthread_mutex_init(mutex->timing, NULL);
+	pthread_mutex_init(mutex->eating, NULL);
 	return (mutex);
 }
 
