@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:39:15 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/21 17:14:51 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/22 18:32:40 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 long long unsigned	ft_timer(long long unsigned diff, pthread_mutex_t *timing)
 {
 	long long unsigned	actual_time;
-	
+
 	pthread_mutex_lock(timing);
 	actual_time = ft_get_time();
 	pthread_mutex_unlock(timing);

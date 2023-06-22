@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 11:06:23 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/21 17:14:58 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/22 18:35:15 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_data
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				eating_times;
 	bool			optional_arg;
 	pthread_mutex_t	*arr_fork;
 }	t_data;
@@ -38,6 +37,7 @@ typedef struct s_mutex
 	pthread_mutex_t	*timing;
 	pthread_mutex_t	*printing;
 	pthread_mutex_t	*eating;
+	pthread_mutex_t	*last_meal;
 }	t_mutex;
 
 typedef struct s_philo
@@ -45,41 +45,47 @@ typedef struct s_philo
 	int					left_fork;
 	int					right_fork;
 	int					id;
+	int					eating_times;
 	long long unsigned	last_meal;
 	long long unsigned	time_delay;
-	bool                *death_check;
-	bool                *eat_check;
+	bool				*death_check;
 	pthread_t			thread;
 	t_data				*data;
 	t_mutex				*mutex;
 }	t_philo;
 
 /*  ERRORS  */
-int		ft_strerror(char *str_error, int return_value);
-int		ft_check_errors(int ac, char **av);
+int					ft_strerror(char *str_error, int return_value);
+int					ft_check_errors(int ac, char **av);
 /*  INIT    */
-void	ft_init_monitoring(t_philo *philo);
-void	ft_init_threads(t_philo *philo);
-t_philo	*ft_init_forks(t_data *data, t_mutex *mutex);
-t_mutex	*ft_init_mutex(t_mutex *mutex);
-t_data	*ft_init_data(char **av, bool optional);
+void				ft_init_monitoring(t_philo *philo);
+void				ft_init_threads(t_philo *philo);
+t_philo				*ft_init_forks(t_data *data, t_mutex *mutex, char **av);
+t_mutex				*ft_init_mutex(t_mutex *mutex);
+t_data				*ft_init_data(char **av, bool optional);
 /*	ROUTINE	*/
-void	ft_sleep(t_philo *philo);
-void	ft_eat(t_philo *philo);
-void	*ft_routine(void *arg);
+void				ft_sleep(t_philo *philo);
+int					ft_eat(t_philo *philo);
+void				*ft_routine(void *arg);
 /*  UTILS   */
-void	ft_print_info(t_philo *philo, char *str);
-void	*ft_calloc(size_t nmemb, size_t size);
-int		ft_atoi(char *str);
-bool	ft_isdigit(int c);
+void				ft_print_info(t_philo *philo, char *str);
+void				*ft_calloc(size_t nmemb, size_t size);
+int					ft_atoi(char *str);
+bool				ft_isdigit(int c);
 /*  MONITORING_UTILS   */
-bool	ft_eat_amount_check(t_philo *philo, int i);
+bool				ft_eat_amount_check(t_philo *philo);
 /*  TIME HANDLER  */
 long long unsigned	ft_timer(long long unsigned diff, pthread_mutex_t *timing);
 long long unsigned	ft_get_time(void);
 /*  THREAD  */
-void	*ft_monitoring(void *arg);
+void				*ft_monitoring(void *arg);
 /*  DESTRUCTOR  */
-void	ft_destructor(t_philo *philo);
+void				ft_destructor(t_philo *philo);
+/* MORTE */
+bool				ft_rip(t_philo *philo);
+void				ft_take_forks(t_philo *philo);
+int					ft_bonus_eat(t_philo *philo);
+int					ft_forever_alone(t_philo *philo);
+void				ft_declare_death(t_philo *philo);
 
 #endif

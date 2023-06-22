@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:15:21 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/21 17:09:59 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/22 12:32:22 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,9 @@ int	main(int ac, char **av)
 	{
 		data = ft_init_data(av, optional);
 		mutex = ft_init_mutex(mutex);
-		philo = ft_init_forks(data, mutex);
+		philo = ft_init_forks(data, mutex, av);
 		ft_init_threads(philo);
 		ft_destructor(philo);
 	}
-	//memory leak
 	return (0);
 }
