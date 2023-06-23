@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 18:00:42 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/22 18:34:52 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/23 15:29:33 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ void	ft_print_info(t_philo *philo, char *str)
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*new_memory;
-	size_t	bob;
+	size_t	size_nb;
 
-	bob = nmemb * size;
-	if (bob < nmemb)
+	size_nb = nmemb * size;
+	if (size_nb < nmemb)
 		return (NULL);
-	new_memory = malloc(bob);
+	new_memory = malloc(size_nb);
 	if (!new_memory)
 		return (NULL);
-	memset(new_memory, 0, bob);
+	memset(new_memory, 0, size_nb);
 	return (new_memory);
 }
 

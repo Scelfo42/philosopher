@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:33:27 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/22 18:24:41 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/23 15:38:21 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,19 @@ void	ft_init_threads(t_philo *philo)
 	int			i;
 	bool		death;
 
-	i = 0;
+	i = -1;
 	death = false;
-	while (i < philo->data->philo_num)
+	while (++i < philo->data->philo_num)
 	{
 		philo[i].time_delay = ft_get_time();
 		philo[i].last_meal = philo[i].time_delay;
 		philo[i].death_check = &death;
 		pthread_create(&philo[i].thread, NULL, ft_routine, &philo[i]);
-		i++;
 	}
 	ft_init_monitoring(philo);
-	i = 0;
-	while (i < philo->data->philo_num)
-	{
+	i = -1;
+	while (++i < philo->data->philo_num)
 		pthread_join(philo[i].thread, NULL);
-		i++;
-	}
 }
 
 t_philo	*ft_init_forks(t_data *data, t_mutex *mutex, char **av)

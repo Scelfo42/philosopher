@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 11:50:09 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/22 18:31:49 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/23 17:43:17 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ void	ft_sleep(t_philo *philo)
 	ft_print_info(philo, "is sleeping...");
 	usleep(philo->data->time_to_sleep);
 	ft_print_info(philo, "is thinking...");
+	//usleep(500);
 }
 
 int	ft_eat(t_philo *philo)
 {
 	if (philo->left_fork == philo->right_fork)
 		return (ft_forever_alone(philo));
+	if (philo->id == philo->data->philo_num)
+		usleep(1000);
 	ft_take_forks(philo);
 	ft_print_info(philo, "is eating...");
 	pthread_mutex_lock(philo->mutex->last_meal);
@@ -36,23 +39,13 @@ int	ft_eat(t_philo *philo)
 	return (0);
 }
 
-bool	ft_rip(t_philo *philo)
-{
-	pthread_mutex_lock(philo->mutex->death);
-	if (*(philo->death_check) == false)
-	{
-		pthread_mutex_unlock(philo->mutex->death);
-		return (false);
-	}
-	pthread_mutex_unlock(philo->mutex->death);
-	return (true);
-}
-
 void	*ft_routine(void *arg)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	if (philo->id % 2 != 0)
+			usleep(500);
 	while (!ft_rip(philo))
 	{
 		if (ft_eat(philo))

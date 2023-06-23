@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 14:39:34 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/20 14:30:12 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/23 15:37:30 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	ft_check_errors(int ac, char **av)
 				return (ft_strerror("You cannot pass a negative number", 3));
 			if (i == 1 && ft_atoi(av[1]) > 100)
 				return (ft_strerror("I don't want to explode", 4));
+			if (i == 5 && ft_atoi(av[5]) == 0)
+				return (ft_strerror("Let these philosopher eat", 5));
 		}
 	}
 	return (0);
