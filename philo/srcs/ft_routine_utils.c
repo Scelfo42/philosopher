@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 18:29:45 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/23 17:41:20 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/23 17:53:33 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	ft_take_forks(t_philo *philo)
 int	ft_bonus_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->mutex->eating);
-	// philo->eating_times--;
 	if (--philo->eating_times == 0)
 	{
 		ft_print_info(philo, "is satollo!");

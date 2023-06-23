@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 11:50:09 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/23 17:43:17 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/23 17:54:22 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_sleep(t_philo *philo)
 	ft_print_info(philo, "is sleeping...");
 	usleep(philo->data->time_to_sleep);
 	ft_print_info(philo, "is thinking...");
-	//usleep(500);
 }
 
 int	ft_eat(t_philo *philo)
@@ -45,7 +44,7 @@ void	*ft_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 != 0)
-			usleep(500);
+		usleep(500);
 	while (!ft_rip(philo))
 	{
 		if (ft_eat(philo))

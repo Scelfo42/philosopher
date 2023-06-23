@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:15:21 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/23 15:39:40 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/23 17:55:38 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,8 @@ int	main(int ac, char **av)
 	if (!ft_check_errors(ac, av))
 	{
 		data = ft_init_data(av, optional);
-		if (!data)
-			return (6);
 		mutex = ft_init_mutex(mutex);
-		if (!mutex)
-			return (7);
 		philo = ft_init_forks(data, mutex, av);
-		if (!philo)
-			return (8);
 		ft_init_threads(philo);
 		ft_destructor(philo);
 	}
