@@ -4,4 +4,4 @@ Eat, Sleep, Spaghetti, repeat. This project is about learning how threads work b
  
 **Project starting: 14/06/2023**
 
-**Project finished: ...**
+**Project finished: 23/06/2023**
